@@ -11,21 +11,20 @@
         <div class="window">
             <div class="header">Buddy Project: Sync Your Friendship</div>
             <div class="particular-person">
-                    <select id="friends" name="friends">
-                        <option value="ankit">Choose Friend</option>
-                        <option value="ankit">Ankit</option>
-                        <option value="arpita">Arpita</option>
-                        <option value="ayush">Ayush</option>
-                        <option value="jyoti">Jyoti</option>
-                        <option value="kiron">Kiron</option>
-                        <option value="manab">Manab</option>
-                        <option value="sai">Sai</option>
-                        <option value="sukanya">Sukanya</option>
-                    </select>
-                  </div>
-                  <div class="result">
-
-                  </div>
+                <select id="friends" name="friends" onchange="displaySelectedValue()">
+                  <option value="#">Choose Friend</option>
+                  <option value="Ankit">Ankit</option>
+                  <option value="Arpita">Arpita</option>
+                  <option value="Ayush">Ayush</option>
+                  <option value="Jyoti">Jyoti</option>
+                  <option value="Kiron">Kiron</option>
+                  <option value="Manab">Manab</option>
+                  <option value="Sai">Sai</option>
+                  <option value="Sukanya">Sukanya</option>
+                </select>
+              </div>
+              
+              <div id="selected"></div>
             </div>
         </div>
     </div>

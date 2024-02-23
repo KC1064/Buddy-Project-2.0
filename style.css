@@ -43,5 +43,12 @@
     align-items: center;
 }
 
-
+#selected {
+    height: 20px;
+    width: 150px;
+    background: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-size: 12px;
+    color: white;
+}
 

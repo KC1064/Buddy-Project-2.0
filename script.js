@@ -1,16 +1,20 @@
-const dropdownToggle = document.querySelector(".dropdown-toggle");
-//Dropdown
-dropdownToggle.addEventListener("click", () => {
-  const dropdownMenu = document.querySelector("#dropdown > .menu");
-  dropdownMenu.classList.toggle("open");
-  dropdownToggle.classList.toggle("open");
-});
+const kiron = [
+  ["DBMS", "Operating System", "Economics", "DAA", "Free", "Math IV", "Free", "AJP/AI"],
+  ["Free", "DBMS", "DBMS Lab", "DBMS Lab", "Free", "Math IV", "Free", "Free"],
+  ["Operating System", "AJP/AI", "DBMS", "Math IV", "Free", "DAA", "DBMS Lab", "DBMS Lab"],
+  ["Free", "Operating System", "Economics", "Free", "Free", "DAA", "DAA Lab", "DAA Lab"],
+  ["Operating System Lab", "Operating System Lab", "DBMS", "Free", "Math IV", "DAA", "Economics", "AJP/AI"]
+];
 
-dropdownMenu.addEventListener("click", (event) => {
-    if (event.target.tagName === "A") {
-        const selectedFriend = event.target.textContent;
-        document.getElementById("friend-name").textContent = selectedFriend;
-        dropdownMenu.classList.remove("open");
-        dropdownToggle.classList.remove("open");
-    }
-});
+const mrinal = [
+  ["DBMS", "Operating System", "Economics", "DAA", "Free", "Math IV", "Free", "AJP/AI"],
+  ["Free", "DBMS", "DBMS Lab", "DBMS Lab", "Free", "Math IV", "Free", "Free"],
+  ["Operating System", "AJP/AI", "DBMS", "Math IV", "Free", "DAA", "DBMS Lab", "DBMS Lab"],
+  ["Free", "Operating System", "Economics", "Free", "Free", "DAA", "DAA Lab", "DAA Lab"],
+  ["Operating System Lab", "Operating System Lab", "DBMS", "Free", "Math IV", "DAA", "Economics", "AJP/AI"]
+];
+
+function displaySelectedValue() {
+  const selectedValue = document.getElementById("friends").value;
+  document.getElementById("selected").innerText = `Selected Value: ${selectedValue}`;
+}
