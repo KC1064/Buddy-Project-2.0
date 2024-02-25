@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
 *{
     padding: 0;
     margin: 0;
@@ -44,11 +45,40 @@
 }
 
 #selected {
-    height: 20px;
-    width: 150px;
-    background: rgb(0, 0, 0);
+    height:160px;
+    width: 100%;
+    background: rgb(162, 197, 48);
     border-radius: 5px;
     font-size: 12px;
     color: white;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+    text-align: center;
+    /* visibility: hidden; */
 }
+
+#friends {
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    font-size: 17px;
+    font-family: "Anta", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.table {
+    height: 40px;
+    background: saddlebrown;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* visibility: hidden; */
+
+}
+
 
