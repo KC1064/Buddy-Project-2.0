@@ -64,7 +64,7 @@ function displaySelectedValue() {
 function findFreeSlots() {
   const selectedFriend = document.getElementById("friends").value;
   const timetable = timetableData[selectedFriend];
-  const date = new Date();
+  const date = new Date(2024,2,1,11,50,45,55);
   const day = date.getDay();
   const options = { timeZone: 'Asia/Kolkata' };
   const hours = date.toLocaleString('en-US', { ...options, hour: 'numeric', hour12: false });
@@ -114,29 +114,6 @@ function findFreeSlots() {
   return [i, j];
 }
 
-// function displayFreeFriends() {
-//   const [i, j] = findFreeSlots();
-//   const selectedFriend = document.getElementById("friends").value;
-//   const timetable = timetableData[selectedFriend];
-
-//   // Loader
-//   const loadingOverlay = document.getElementById("loading-overlay");
-//   loadingOverlay.style.display = 'flex';
-
-//   setTimeout(() => {
-//     for (const friend in timetableData) {
-//       const friendId = friend.toLowerCase();
-//       const img = document.getElementById(friendId);
-//       if (timetableData[friend][i][j] === "Free" && friendId !== selectedFriend.toLowerCase()) {
-//         img.style.visibility = 'visible';
-//       } else {
-//         img.style.visibility = 'hidden';
-//       }
-//     }
-
-//     loadingOverlay.style.display = 'none';
-//   }, 1000);
-// }
 
 
 function displayFreeFriends() {
@@ -153,17 +130,18 @@ function displayFreeFriends() {
       const friendId = friend.toLowerCase();
       const img = document.getElementById(friendId);
       if (timetableData[friend][i][j] === "Free" && friendId !== selectedFriend.toLowerCase()) {
-        img.style.visibility = 'visible';
+        // Apply grayscale using the filter property
+        img.style.filter = 'grayscale(0%)';
       } else {
-        img.style.visibility = 'hidden';
+        img.style.filter = 'grayscale(100%)';
       }
     }
-
     setTimeout(() => {
       loadingOverlay.style.display = 'none';
     }, 1000); // Adjust this time according to your preference
   });
 }
+
 
 
 const button = document.getElementById("button");
