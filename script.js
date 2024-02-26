@@ -1,37 +1,3 @@
-// const kiron = [
-//   ["DBMS", "OS", "Economics", "DAA", "Free", "Math IV", "Free", "AJP/AI"],
-//   ["Free", "DBMS", "DBMS Lab", "DBMS Lab", "Free", "Math IV", "Free", "Free"],
-//   ["OS", "AJP/AI", "DBMS", "Math IV", "Free", "DAA", "DBMS Lab", "DBMS Lab"],
-//   ["Free", "OS", "Economics", "Free", "Free", "DAA", "DAA Lab", "DAA Lab"],
-//   ["OS Lab", "OS Lab", "DBMS", "Free", "Math IV", "DAA", "Economics", "AJP/AI"]
-// ];
-
-// const mrinal = [
-//   ["DBMS", "Operating System", "Economics", "DAA", "Free", "Math IV", "Free", "AJP/AI"],
-//   ["Free", "DBMS", "DBMS Lab", "DBMS Lab", "Free", "Math IV", "Free", "Free"],
-//   ["Operating System", "AJP/AI", "DBMS", "Math IV", "Free", "DAA", "DBMS Lab", "DBMS Lab"],
-//   ["Free", "Operating System", "Economics", "Free", "Free", "DAA", "DAA Lab", "DAA Lab"],
-//   ["Operating System Lab", "Operating System Lab", "DBMS", "Free", "Math IV", "DAA", "Economics", "AJP/AI"]
-// ];
-// const selectedValue = document.getElementById("friends").value;
-// // function displaySelectedValue() {
-// //   document.getElementById("selected").innerText = `Selected Value: ${selectedValue}`;
-// // }
-// const today = new Date("Feb 26, 2024 10:30:00");
-// function printTT(){
-//   const day = today.getDay();
-//   if (day === 0){
-//     document.querySelector(".time1").textContent = kiron[0][0];
-//     document.querySelector(".time2").textContent = kiron[0][1];
-//     document.querySelector(".time3").textContent = kiron[0][2];
-//     document.querySelector(".time4").textContent = kiron[0][3];
-//     document.querySelector(".time5").textContent = kiron[0][4];
-//     document.querySelector(".time6").textContent = kiron[0][5];
-//     document.querySelector(".time7").textContent = kiron[0][6];
-//     document.querySelector(".time8").textContent = kiron[0][7];
-//   }
-// }
-
 const timetableData = {
   "Kiron": [
     ["DBMS", "Operating System", "Economics", "DAA", "Free", "Math IV", "Free", "AJP/AI"],
@@ -69,14 +35,136 @@ const timetableData = {
     ["DBMS Lab", "DBMS Lab", "Operating System", "Economics", "Free", "Math IV", "DAA", "AJP/AI"]
   ]
 };
+// // TO get day and time
+// const date = new Date();
+// const day = date.getDay();
+// // console.log(day);
+
+// const options = { timeZone: 'Asia/Kolkata' };
+
+// const hours = date.toLocaleString('en-US', { ...options, hour: 'numeric', hour12: false });
+
+// const minutes = date.toLocaleString('en-US', { ...options, minute: 'numeric' });
+
+// // console.log(`${hours}:${minutes}`);
+
+
 
 function displaySelectedValue() {
   const selectedFriend = document.getElementById("friends").value;
   const timetable = timetableData[selectedFriend];
   const selectedDiv = document.querySelector("#selected");
   selectedDiv.style.visibility = 'visible';
-  
+
   for (let i = 0; i < 8; i++) {
     document.querySelector(`.time${i + 1}`).textContent = timetable[0][i];
   }
 }
+
+function findFreeSlots() {
+  const selectedFriend = document.getElementById("friends").value;
+  const timetable = timetableData[selectedFriend];
+  const date = new Date();
+  const day = date.getDay();
+  const options = { timeZone: 'Asia/Kolkata' };
+  const hours = date.toLocaleString('en-US', { ...options, hour: 'numeric', hour12: false });
+  const minutes = date.toLocaleString('en-US', { ...options, minute: 'numeric' });
+  const time = parseInt(hours) * 60 + parseInt(minutes);
+  let i = -1;
+  let j = -1;
+
+  switch (day) {
+    case 1:
+      i = 0;
+      break;
+    case 2:
+      i = 1;
+      break;
+    case 3:
+      i = 2;
+      break;
+    case 4:
+      i = 3;
+      break;
+    case 5:
+      i = 4;
+      break;
+  }
+
+  if (time >= 480 && time <= 535) {
+    j = 0;
+  } else if (time > 535 && time <= 590) {
+    j = 1;
+  } else if (time > 590 && time <= 645) {
+    j = 2;
+  } else if (time > 645 && time <= 700) {
+    j = 3;
+  } else if (time > 700 && time <= 755) {
+    j = 4;
+  } else if (time > 755 && time <= 810) {
+    j = 5;
+  } else if (time > 810 && time <= 865) {
+    j = 6;
+  } else if (time > 865 && time <= 920) {
+    j = 7;
+  } else {
+    console.log("Outside class hours");
+  }
+
+  return [i, j];
+}
+
+// function displayFreeFriends() {
+//   const [i, j] = findFreeSlots();
+//   const selectedFriend = document.getElementById("friends").value;
+//   const timetable = timetableData[selectedFriend];
+
+//   // Loader
+//   const loadingOverlay = document.getElementById("loading-overlay");
+//   loadingOverlay.style.display = 'flex';
+
+//   setTimeout(() => {
+//     for (const friend in timetableData) {
+//       const friendId = friend.toLowerCase();
+//       const img = document.getElementById(friendId);
+//       if (timetableData[friend][i][j] === "Free" && friendId !== selectedFriend.toLowerCase()) {
+//         img.style.visibility = 'visible';
+//       } else {
+//         img.style.visibility = 'hidden';
+//       }
+//     }
+
+//     loadingOverlay.style.display = 'none';
+//   }, 1000);
+// }
+
+
+function displayFreeFriends() {
+  const [i, j] = findFreeSlots();
+  const selectedFriend = document.getElementById("friends").value;
+  const timetable = timetableData[selectedFriend];
+
+  // Loader
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.style.display = 'flex';
+
+  setTimeout(() => {
+    for (const friend in timetableData) {
+      const friendId = friend.toLowerCase();
+      const img = document.getElementById(friendId);
+      if (timetableData[friend][i][j] === "Free" && friendId !== selectedFriend.toLowerCase()) {
+        img.style.visibility = 'visible';
+      } else {
+        img.style.visibility = 'hidden';
+      }
+    }
+
+    setTimeout(() => {
+      loadingOverlay.style.display = 'none';
+    }, 1000); // Adjust this time according to your preference
+  });
+}
+
+
+const button = document.getElementById("button");
+button.addEventListener("click", displayFreeFriends);
