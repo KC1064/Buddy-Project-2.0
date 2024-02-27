@@ -157,7 +157,7 @@ function displayFreeFriends() {
       images.forEach(img => {
         img.style.visibility = "visible";
       });
-    }, 2000); 
+    }, 1000); 
   });
 }
 

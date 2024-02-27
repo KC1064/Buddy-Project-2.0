@@ -306,8 +306,13 @@
         max-width: 100%;
     }
 
-    .table, #button {
-        width: 100%;
+    .table {
+        width: 20%;
+        max-width: none;
+    }
+
+    #button {
+        width: 40%;
         max-width: none;
     }
 }
