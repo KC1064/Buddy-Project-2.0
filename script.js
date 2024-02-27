@@ -35,7 +35,7 @@ const timetableData = {
     ["DBMS Lab", "DBMS Lab", "Operating System", "Economics", "Free", "Math IV", "DAA", "AJP/AI"]
   ]
 };
-// // TO get day and time
+// TO get day and time
 // const date = new Date();
 // const day = date.getDay();
 // // console.log(day);
@@ -55,16 +55,25 @@ function displaySelectedValue() {
   const timetable = timetableData[selectedFriend];
   const selectedDiv = document.querySelector("#selected");
   selectedDiv.style.visibility = 'visible';
-
-  for (let i = 0; i < 8; i++) {
-    document.querySelector(`.time${i + 1}`).textContent = timetable[0][i];
+  const date = new Date();
+  const day = date.getDay();
+  // const day = 0;
+  if (day === 0 || day ===6){
+    alert("Today is holiday");
+    selectedDiv.style.visibility = 'hidden';
+    
+  }
+  else{
+    for (let i = 0; i < 8; i++) {
+      document.querySelector(`.time${i + 1}`).textContent = timetable[day-1][i];
+    }
   }
 }
 
 function findFreeSlots() {
   const selectedFriend = document.getElementById("friends").value;
   const timetable = timetableData[selectedFriend];
-  const date = new Date(2024,2,1,11,50,45,55);
+  const date = new Date();
   const day = date.getDay();
   const options = { timeZone: 'Asia/Kolkata' };
   const hours = date.toLocaleString('en-US', { ...options, hour: 'numeric', hour12: false });
@@ -108,12 +117,11 @@ function findFreeSlots() {
   } else if (time > 865 && time <= 920) {
     j = 7;
   } else {
-    console.log("Outside class hours");
+    alert("Outside class hours");
   }
 
   return [i, j];
 }
-
 
 
 function displayFreeFriends() {
@@ -121,28 +129,37 @@ function displayFreeFriends() {
   const selectedFriend = document.getElementById("friends").value;
   const timetable = timetableData[selectedFriend];
 
-  // Loader
   const loadingOverlay = document.getElementById("loading-overlay");
+  const imgContainer = document.querySelector(".image");
+  const images = document.querySelectorAll(".profile");
+
   loadingOverlay.style.display = 'flex';
+
+  // Hide all images initially
+  images.forEach(img => {
+    img.style.visibility = "hidden";
+  });
 
   setTimeout(() => {
     for (const friend in timetableData) {
       const friendId = friend.toLowerCase();
       const img = document.getElementById(friendId);
       if (timetableData[friend][i][j] === "Free" && friendId !== selectedFriend.toLowerCase()) {
-        // Apply grayscale using the filter property
         img.style.filter = 'grayscale(0%)';
       } else {
         img.style.filter = 'grayscale(100%)';
       }
     }
+    
     setTimeout(() => {
       loadingOverlay.style.display = 'none';
-    }, 1000); // Adjust this time according to your preference
+      imgContainer.style.visibility = "visible";
+      images.forEach(img => {
+        img.style.visibility = "visible";
+      });
+    }, 2000); 
   });
 }
-
-
 
 const button = document.getElementById("button");
 button.addEventListener("click", displayFreeFriends);
